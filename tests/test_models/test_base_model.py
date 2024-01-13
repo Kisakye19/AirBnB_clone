@@ -60,4 +60,13 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(type(my_model_dict["__class__"]), str)
         self.assertEqual(type(my_model_dict["my_number"]), int)
         self.assertEqual(type(my_model_dict["name"]), str)
-
+    
+    def test_instance_creation(self):
+        """
+        Test creating an instance of BaseModel
+        """
+        my_model = BaseModel()
+        self.assertIsInstance(my_model, BaseModel)
+        self.assertTrue(hasattr(my_model, "id"))
+        self.assertTrue(hasattr(my_model, "created_at"))
+        self.assertTrue(hasattr(my_model, "updated_at"))
