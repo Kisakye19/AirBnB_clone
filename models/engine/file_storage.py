@@ -4,6 +4,13 @@ Module for FileStorage class
 """
 import json
 from os.path import exists
+from models.user import User
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
+
 
 class FileStorage:
     """
@@ -12,6 +19,16 @@ class FileStorage:
 
     __file_path = "file.json"
     __objects = {}
+    
+    class_dict = {
+    "BaseModel": BaseModel,
+    "User": User,
+    "Place": Place,
+    "Amenity": Amenity,
+    "City": City,
+    "Review": Review,
+    "State": State
+    }
 
     def all(self):
         """Returns the dictionary __objects"""
@@ -35,6 +52,6 @@ class FileStorage:
                 obj_dict = json.load(file)
                 for key, obj in obj_dict.items():
                     class_name, obj_id = key.split('.')
-                    obj_instance = eval(class_name)(**obj)
+                    obj_instance = self.class_dict[class_name](**obj)
                     self.__objects[key] = obj_instance
 
