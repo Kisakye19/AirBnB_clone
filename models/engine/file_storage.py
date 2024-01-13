@@ -4,6 +4,7 @@ Module for FileStorage class
 """
 import json
 from os.path import exists
+from models.base_model import BaseModel
 from models.user import User
 from models.place import Place
 from models.state import State
@@ -54,4 +55,5 @@ class FileStorage:
                     class_name, obj_id = key.split('.')
                     obj_instance = self.class_dict[class_name](**obj)
                     self.__objects[key] = obj_instance
-
+            except Exception:
+            pass
